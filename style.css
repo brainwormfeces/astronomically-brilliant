@@ -233,6 +233,8 @@ footer {
 html {
   scroll-behavior: smooth;
 }
+position: relative;
+overflow: visible;
 
  .tooltip img {
   opacity: 0;
@@ -241,4 +243,9 @@ html {
 
 .tooltip:hover img {
   opacity: 1;
+}
+
+a::after {
+  position: absolute;
+  top: 100%;
 }
