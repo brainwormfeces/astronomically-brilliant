@@ -24,6 +24,7 @@ h1 span {
   border-radius: 12px;
   position: relative;
   animation: glow 2s infinite alternate;
+  font-family: "Copperplate", fantasy;
 }
 
 
@@ -45,7 +46,7 @@ p {
 /* links */
 a {
   color: #66ccff;
-  font-family: "Calibri", normal;
+  font-family: "Copperplate", fantasy;
   text-decoration: none;
   transition: color 0.3s ease, transform 0.2s ease;
 }
@@ -231,4 +232,13 @@ footer {
 /* scrolling gimmick */
 html {
   scroll-behavior: smooth;
+}
+
+ .tooltip img {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover img {
+  opacity: 1;
 }
