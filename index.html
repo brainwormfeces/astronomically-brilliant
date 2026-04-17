@@ -64,25 +64,6 @@
   </style>
 </head>
 <body>
-          // display question in public list if visible
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Q&A System</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-  <h2>Questions</h2>
-  <div id="questionsList"></div>
-
-  <h2>Moderator Panel</h2>
-  <div id="modPanel"></div>
-
-  <script src="script.js"></script>
-</body>
-</html>
   
   <!-- user question form -->
    <h1>piggybank for your valuable thoughts</h1>
@@ -147,7 +128,22 @@
         const data = docSnap.data();
         const docId = docSnap.id;
         
-          
+
+        // questions vs answers
+
+             if (data.visible) {
+          const div = document.createElement('div');
+          div.className = 'question-item';
+          div.innerHTML = `<strong>somebody said:</strong> ${data.text}<br><strong>i said:</strong> ${data.answer || "(not answered yet)"}`;
+          questionsList.appendChild(div);
+        }
+
+        // display question in mod panel
+        if (isModerator) {
+          const div = document.createElement('div');
+          div.className = 'question-item';
+          div.innerHTML = `<strong>somebody said:</strong> ${data.text}`;
+
           // answer input if not answered
           if (!data.answered) {
             const answerInput = document.createElement('input');
