@@ -33,7 +33,6 @@ window.addEventListener('DOMContentLoaded', async () => {
 });
 
 // submit a question
-// Submit question
 document.getElementById('submitQuestion').addEventListener('click', async () => {
   const questionText = document.getElementById('userQuestion').value.trim();
   if (!questionText) return;
