@@ -27,8 +27,25 @@ h1 span {
   font-family: "Copperplate", fantasy;
 }
 
-.message-block {
+.question-item {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.message {
   margin-bottom: 12px;
+}
+
+.user-msg {
+  background: #f5f5f5;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.answer-msg {
+  background: #e8f4ff;
+  padding: 8px;
+  border-radius: 6px;
 }
 
 /* animation effs */
