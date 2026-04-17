@@ -129,24 +129,12 @@
         const docId = docSnap.id;
 
         // display question in public list if visible
-       if (data.visible) {
-  const div = document.createElement('div');
-  div.className = 'question-item';
-
-  div.innerHTML = `
-    <div class="message-block">
-      <strong>somebody said:</strong><br>
-      ${data.text}
-    </div>
-
-    <div class="message-block">
-      <strong>i said:</strong><br>
-      ${data.answer || "(not answered yet)"}
-    </div>
-  `;
-
-  questionsList.appendChild(div);
-}
+     if (data.visible) {
+          const div = document.createElement('div');
+          div.className = 'question-item';
+          div.innerHTML = `<strong>somebody said:</strong> ${data.text}<br><strong>i said:</strong> ${data.answer || "(not answered yet)"}`;
+          questionsList.appendChild(div);
+        }
 
         // display question in mod panel
         if (isModerator) {
