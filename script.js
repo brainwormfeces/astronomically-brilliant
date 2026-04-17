@@ -49,6 +49,27 @@ document.getElementById('submitQuestion').addEventListener('click', async () => 
   loadQuestions();
 });
 
+// Questions vs answers
+
+if (data.visible) {
+  const div = document.createElement('div');
+  div.className = 'question-item';
+
+  div.innerHTML = `
+    <div class="message user-msg">
+      <strong>What you said:</strong>
+      <p>${data.text}</p>
+    </div>
+
+    <div class="message answer-msg">
+      <strong>What I said:</strong>
+      <p>${data.answer || "(not answered yet)"}</p>
+    </div>
+  `;
+
+  questionsList.appendChild(div);
+}
+  
 // Load questions from Firebase
 async function loadQuestions() {
   const querySnapshot = await getDocs(collection(db, "questions"));
