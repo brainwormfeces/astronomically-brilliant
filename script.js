@@ -1,3 +1,7 @@
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {
   getFirestore,
@@ -7,6 +11,7 @@ import {
   doc,
   updateDoc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyDzfWGiPaf6gDEtWW2nvWmtHNM9-NL53VU",
@@ -20,6 +25,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
 
 window.addEventListener("DOMContentLoaded", () => {
 
@@ -31,7 +37,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const showModerator = document.getElementById('showModerator');
   const exitModerator = document.getElementById('exitModerator');
 
-  let isModerator = false;
+ let isModerator = false;
 
   // submit questions
   submitButton.addEventListener('click', async () => {
@@ -58,9 +64,10 @@ window.addEventListener("DOMContentLoaded", () => {
     querySnapshot.forEach((docSnap) => {
       const data = docSnap.data();
       const docId = docSnap.id;
+      if (data.deleted) return;
 
       // display question in public list if visible
-      if (data.visible) {
+     if (data.visible) {
         const div = document.createElement('div');
          div.className = 'question-item';
 
@@ -73,15 +80,20 @@ window.addEventListener("DOMContentLoaded", () => {
         `;
 
         const button = document.createElement('button');
-        button.textContent = "read more";
+        button.textContent = "Read more";
 
         button.onclick = () => {
          textDiv.classList.toggle('truncated');
          button.textContent =
          textDiv.classList.contains('truncated')
-        ? "read more"
-        : "show less";
+        ? "Read more"
+        : "Show less";
     };
+
+  div.appendChild(textDiv);
+  div.appendChild(button);
+  questionsList.appendChild(div);
+}
 
       // display question in mod panel
       if (isModerator) {
@@ -158,6 +170,18 @@ window.addEventListener("DOMContentLoaded", () => {
     if (showModerator) showModerator.style.display = "inline-block";
     loadQuestions();
   });
+}
+function loginModerator() {
+  const email = prompt("email:");
+  const password = prompt("password:");
+
+  signInWithEmailAndPassword(auth, email, password)
+    .then(() => {
+      alert("logged in as moderator");
+    })
+    .catch((err) => {
+      alert(err.message);
+    });
 }
 
   // initial load
