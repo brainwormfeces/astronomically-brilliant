@@ -34,7 +34,6 @@ window.addEventListener("DOMContentLoaded", () => {
   let isModerator = false;
 
   // submit questions
-  if (submitButton) {
   submitButton.addEventListener('click', async () => {
     const text = questionInput.value.trim();
     if (!text) return alert("don't be so eager, type a question first!");
@@ -49,7 +48,6 @@ window.addEventListener("DOMContentLoaded", () => {
     questionInput.value = "";
     loadQuestions();
   });
-}
 
   // load + display questions
   async function loadQuestions() {
@@ -137,12 +135,14 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   // moderator login
+ if (exitModerator) {
   exitModerator.addEventListener('click', () => {
     isModerator = false;
     moderatorPanel.style.display = "none";
-    showModerator.style.display = "inline-block";
+    if (showModerator) showModerator.style.display = "inline-block";
     loadQuestions();
   });
+}
 
   // initial load
   loadQuestions();
