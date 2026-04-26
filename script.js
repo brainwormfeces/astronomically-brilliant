@@ -81,6 +81,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         const button = document.createElement('button');
         button.textContent = "Read more";
+        button.classList.add('read-toggle');
 
         button.onclick = () => {
          textDiv.classList.toggle('truncated');
@@ -88,7 +89,7 @@ window.addEventListener("DOMContentLoaded", () => {
          textDiv.classList.contains('truncated')
         ? "Read more"
         : "Show less";
-    };
+  };
 
   div.appendChild(textDiv);
   div.appendChild(button);
